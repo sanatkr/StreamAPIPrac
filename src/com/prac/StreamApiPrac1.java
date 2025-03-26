@@ -14,7 +14,15 @@ public class StreamApiPrac1 {
 			.filter(val->val%2==0)
 			.collect(Collectors.toList());
 		
+		System.out.println("Filter result -->");
 		filteredResult.forEach(v->System.out.println(v));
+		
+		List<Integer> mappedResult = list.stream()
+			.map(val->val*2)
+			.collect(Collectors.toList());
+		
+		System.out.println("\nMap result -->");
+		mappedResult.forEach(v->System.out.println(v));
 		
 		
 		
