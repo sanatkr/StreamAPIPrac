@@ -17,6 +17,7 @@ public class EmployeeHashMapTester {
 		empMap.put(new Employee(2,"shishir",4000), 700);
 		empMap.put(new Employee(7,"shashi",8000), 200);
 		empMap.put(new Employee(5,"sumit",2000), 400);
+		empMap.put(new Employee(3,"aman",9000), 500);
 		
 		// Sorting based on roll number of the employee
 		
@@ -85,6 +86,23 @@ public class EmployeeHashMapTester {
 		.collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
 		
 		sorted4.forEach((e,v)->System.out.println(e+" , "+v));
+		
+		
+		
+		System.out.println("Comparing By Key Based on Name of the Employee in Asc Order **********************************************");
+		empMap.entrySet()
+		.stream()
+		.sorted(Map.Entry.comparingByKey(Comparator.comparing(Employee::getName)))
+		.forEachOrdered((entry)->System.out.println(entry.getKey()+" , "+entry.getValue()));
+		
+		
+		
+		System.out.println("Comparing By Key Based on Name of the Employee in Desc Order **********************************************");
+		empMap.entrySet()
+		.stream()
+		.sorted(Map.Entry.<Employee,Integer>comparingByKey(Comparator.comparing(Employee::getName)).reversed())
+		.forEachOrdered((entry)->System.out.println(entry.getKey()+" , "+entry.getValue()));
+		
 		
 		
 
