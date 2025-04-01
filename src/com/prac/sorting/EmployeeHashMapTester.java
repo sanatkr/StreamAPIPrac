@@ -104,6 +104,13 @@ public class EmployeeHashMapTester {
 		.forEachOrdered((entry)->System.out.println(entry.getKey()+" , "+entry.getValue()));
 		
 		
+		System.out.println("Comparing By Key Based on Name of the Employee in Asc Order **********************************************");
+		empMap.entrySet()
+		.stream()
+		.sorted(Map.Entry.<Employee,Integer>comparingByKey(Comparator.comparing(Employee::getName)))
+		.forEachOrdered((entry)->System.out.println(entry.getKey()+" , "+entry.getValue()));
+		
+		
 		
 
 	}
