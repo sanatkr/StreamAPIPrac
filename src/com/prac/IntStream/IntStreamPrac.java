@@ -40,6 +40,17 @@ public class IntStreamPrac {
 		List<Integer> collect = stream2.boxed().collect(Collectors.toList());
 		System.out.println(collect);
 		
+		Stream<Integer> boxed = Arrays.stream(intArray)
+				.boxed();
+			  //.map(value->Integer.valueOf(value));
+		
+		
+		Stream<Integer> map = Arrays.stream(intArray)
+			   .boxed()
+			   .map(value->value.hashCode());
+		
+		
+			  
 
 	}
 
