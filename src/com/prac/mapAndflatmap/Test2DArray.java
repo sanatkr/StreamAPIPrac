@@ -10,65 +10,80 @@ public class Test2DArray {
 
 	public static void main(String[] args) {
 
-		int[][] arr = {{1,2,3},{4,5,6},{7,8,9}};
+		int[][] arr = {{1,2,3},{4,5,6},{7,8,9},{10}};
 		
 		int[] arr1 = {1,2,3,4,5};
 		int[] arr2 = new int[] {1,2,3};
 		
 		
-		IntStream of = IntStream.of(arr1);
+		int[] array4 = Arrays.stream(arr)
+			  .flatMapToInt(e->Arrays.stream(e))
+			  .toArray();
+		
+		System.out.println("Flattened array is --> "+Arrays.toString(array4));
+
+		System.out.println("*********************************");
+		
+		int[] array2 = Arrays.stream(arr)
+		  .flatMapToInt(Arrays::stream)
+		  .toArray();
+		
+		System.out.println("*********************************");
+
 		
 		Stream<int[]> stream3 = Arrays.stream(arr);
 		
-		IntStream flatMapToInt = stream3.flatMapToInt(x->Arrays.stream(x));
+		Stream<IntStream> map2 = Arrays.stream(arr)
+			  .map(e-> Arrays.stream(e));
 		
-		int[] array4 = flatMapToInt.toArray();
+		System.out.println("*********************************");
+
+		Stream<Integer> flatMap = Arrays.stream(arr)
+		  	  .map(e-> Arrays.stream(e))
+		  	  .flatMap(e->e.boxed());
 		
-		
-		
-		
-		
-		// First way
-		
-	
-		
+		System.out.println("*********************************");
 		
 		
+		int[] array5 = Arrays.stream(arr)
+	  	  	  				 .map(e-> Arrays.stream(e))
+	  	  	  				 .flatMap(e->e.boxed())
+	  	  	  				 .mapToInt(e->e)
+	  	  	  				 .toArray();
+			
+		System.out.println("\nAnother way Flattened array is --> "+Arrays.toString(array5));
+		
+		System.out.println("*********************************");
+
+		
+		// Without using stream
+		
+		int[][] array = {{1,2,3},{4,5,6},{7,8,9},{10}};
+		
+		
+		int totalELements = 0;
+		
+		for(int[] row : array)
+		{
+			totalELements += row.length;
+		}
+		
+		int[] newArray = new int[totalELements];
+		int index = 0;
+		
+		for(int[] row : array)
+		{
+			for(int element : row)
+			{
+				newArray[index++] = element;
+			}
+		}
+		
+		System.out .println("Without using stream conversion --> "+ Arrays.toString(newArray));
 		
 		
 		
 		
-		
-		
-		Stream<int[]> stream = Arrays.stream(arr);
-		
-		IntStream stream2 = Arrays.stream(arr1);
-		
-		int[] array = Arrays.stream(arr)
-				.flatMapToInt(list -> Arrays.stream(list))
-				.toArray();
-		
-		
-		Stream<IntStream> map = Arrays.stream(arr)
-				.map(list -> Arrays.stream(list));
-		
-		
-		Object[] array2 = Arrays.stream(arr)
-		.map(list -> Arrays.stream(list))
-		.toArray();
-		
-		
-	
-		
-		System.out.println(Arrays.toString(array2));
-		
-		
-		
-		
-		
-		int[] array3 = Stream.of(arr)
-			.flatMapToInt(row -> IntStream.of(row))
-			.toArray();
 		
 		
 		

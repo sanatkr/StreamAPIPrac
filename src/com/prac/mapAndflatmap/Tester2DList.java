@@ -1,6 +1,7 @@
 package com.prac.mapAndflatmap;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.function.Function;
@@ -19,6 +20,65 @@ public class Tester2DList {
 		// Creating List<List<Integer>>
 		List<List<Integer>> list = Arrays.asList(list1,list2);
 		
+		System.out.println("2D List --> "+list);
+		
+		System.out.println("***********************************************************");
+		
+		List<Integer> collect2 = list.stream()
+			.flatMap(e->e.stream())
+			.collect(Collectors.toList());
+		
+		System.out.println("1D List --> "+collect2);
+		
+		System.out.println("***********************************************************");
+		
+		list.stream()
+		    .flatMap(Collection::stream)
+		    .collect(Collectors.toList());
+		
+		
+		
+		System.out.println("***********************************************************");
+		
+		
+		
+		IntStream flatMapToInt = list.stream()
+			.flatMapToInt(e -> e.stream().mapToInt(Integer::intValue));
+		
+		System.out.println("***********************************************************");
+
+		
+		int[] array11 = list.stream()
+		.flatMapToInt(e -> e.stream().mapToInt(Integer::intValue))
+		.toArray();
+		
+		System.out.println("***********************************************************");
+
+		
+		
+		List<Integer> collect3 = list.stream()
+		.flatMapToInt(e -> e.stream().mapToInt(Integer::intValue))
+		.boxed()
+		.collect(Collectors.toList());
+		
+		System.out.println("***********************************************************");
+
+		
+		
+		
+		Integer[] array10 = list.stream()
+		.flatMapToInt(e -> e.stream().mapToInt(Integer::intValue))
+		.boxed()
+		.toArray(Integer[]::new);
+		
+		System.out.println("***********************************************************");
+
+
+		Stream<List<Integer>> stream4 = list.stream();
+		
+		Stream<List<Integer>> map = list.stream()	
+			.map(ele -> ele);
+		
 		
 		// map() example
 		List<List<Integer>> mappedItems = list.stream()	
@@ -27,15 +87,7 @@ public class Tester2DList {
 		
 		System.out.println(mappedItems);
 		
-		System.out.println("***********************************************************");
 		
-		// flatMap() example
-		List<Integer> mappedItems1 = list.stream()	
-		    .map(ele -> ele.stream())
-		    .flatMap(Function.identity())
-		    .collect(Collectors.toList());
-		
-		System.out.println(mappedItems1);
 		
 		System.out.println("***********************************************************");
 		
@@ -47,11 +99,28 @@ public class Tester2DList {
 		
 		System.out.println(flatMappedItems); 
 		
+		
+		Stream<Integer> flatMap = list.stream()
+				                      .flatMap(ele->ele.stream());
+		
+		System.out.println("***********************************************************");
+		
+		// flatMap() example
+		List<Integer> mappedItems1 = list.stream()	
+										 .map(ele -> ele.stream())
+										 .flatMap(Function.identity())
+										 .collect(Collectors.toList());
+		
+		System.out.println(mappedItems1);
+		
 		System.out.println("***********************************************************");
 		
 		
 		// Creating IntStream from List<Integer>
-		IntStream mapToInt = list1.stream()
+		
+		Stream<Integer> stream = list1.stream();
+		
+		IntStream mapToInt = stream
 							      .mapToInt(elem -> elem.intValue());
 		
 		mapToInt.forEach(System.out::println);
@@ -67,6 +136,12 @@ public class Tester2DList {
 		
 		System.out.println(Arrays.toString(array));
 		
+		List<Integer> collect = list1.stream()
+			 .collect(Collectors.toList());
+		
+		Integer[] array8 = list1.stream()
+			 .toArray(Integer[]::new);
+		
 		System.out.println("***********************************************************");
 
 		
@@ -75,11 +150,12 @@ public class Tester2DList {
 		
 		IntStream intStream1 = Arrays.stream(arr);
 		
+		Stream<int[]> of = Stream.of(arr);
 		int sum = intStream1.sum();
 		
 		System.out.println("Sum is --> "+sum);
 		
-		//IntSummaryStatistics summaryStatistics = intStream1.summaryStatistics();
+		IntSummaryStatistics summaryStatistics = Arrays.stream(arr).summaryStatistics();
 		
 		IntStream intStream2 = IntStream.of(arr);
 		
@@ -96,8 +172,8 @@ public class Tester2DList {
 		IntStream.of(arr)
 				 .sorted()
 				 .boxed()
-				 .collect(Collectors.toList())
-				 .forEach(System.out::println);
+				 .collect(Collectors.toList());
+				 //.forEach(System.out::println);
 		
 		
 		System.out.println("***********************************************************");
@@ -155,6 +231,8 @@ public class Tester2DList {
 		
 		Stream<Integer> stream2 = Arrays.stream(arr1);
 		
+		Stream<Integer> stream3 = Stream.of(arr1);
+							
 		
 		IntStream mapToInt2 = stream2.mapToInt(e->e.intValue());
 		
@@ -170,6 +248,17 @@ public class Tester2DList {
 		
 		System.out.println("Integer array --> "+Arrays.toString(array5));
 		
+		System.out.println("Integer array --> "+Arrays.toString(array4));
+		
+		
+		
+		Integer[] array7 = Arrays.stream(arr1)
+		 	  .toArray(Integer[]::new);
+		
+		
+		Object[] array9 = Arrays.stream(arr1)
+	 	  .toArray();
+			
 		
 
 		
