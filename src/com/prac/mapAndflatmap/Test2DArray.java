@@ -1,5 +1,6 @@
 package com.prac.mapAndflatmap;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +15,28 @@ public class Test2DArray {
 		
 		int[] arr1 = {1,2,3,4,5};
 		int[] arr2 = new int[] {1,2,3};
+		
+		
+		List<Integer> list = new ArrayList<>();
+		
+		for(int[] row : arr)
+		{
+			for(int elem : row)
+			{
+				list.add(elem);
+			}
+			
+		}
+		
+		int[] array3 = list.stream()
+			.mapToInt(e->e.intValue())
+			.toArray();
+		
+		System.out.println("Flattened array (array3) is --> "+Arrays.toString(array3));
+
+		
+		System.out.println("*********************************");
+
 		
 		
 		int[] array4 = Arrays.stream(arr)
