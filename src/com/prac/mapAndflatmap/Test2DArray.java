@@ -17,6 +17,20 @@ public class Test2DArray {
 		int[] arr2 = new int[] {1,2,3};
 		
 		
+		Stream<Integer> flatMap2 = Arrays.stream(arr)
+			  .flatMap(e -> Arrays.stream(e).boxed());
+		
+		System.out.println("*********************************");
+
+		
+		int[] array6 = Arrays.stream(arr)
+			  .flatMap(e-> Arrays.stream(e).boxed())
+			  .mapToInt(e->e)
+			  .toArray();
+		
+		System.out.println("*********************************");
+
+		
 		List<Integer> list = new ArrayList<>();
 		
 		for(int[] row : arr)
