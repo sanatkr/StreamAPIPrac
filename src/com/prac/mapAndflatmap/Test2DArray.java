@@ -17,6 +17,21 @@ public class Test2DArray {
 		int[] arr2 = new int[] {1,2,3};
 		
 		
+		Integer[] arr3 = {1,2,3};
+		
+		IntStream stream = Arrays.stream(arr1);
+		Stream<int[]> of = Stream.of(arr1);
+		IntStream of2 = IntStream.of(arr1);
+		
+		
+		
+		
+		Stream<Integer> stream2 = Arrays.stream(arr3);
+		Stream<Integer> of3 = Stream.of(arr3);
+		
+		
+		
+		
 		Stream<Integer> flatMap2 = Arrays.stream(arr)
 			  .flatMap(e -> Arrays.stream(e).boxed());
 		
