@@ -40,6 +40,12 @@ public class IntStreamPrac {
 		List<Integer> collect = stream2.boxed().collect(Collectors.toList());
 		System.out.println(collect);
 		
+		Stream<Integer> mapToObj = Arrays.stream(intArray).mapToObj(i -> Integer.valueOf(i));
+		
+		Stream<Integer> boxed2 = Arrays.stream(intArray).boxed();
+		
+		
+		
 		Stream<Integer> boxed = Arrays.stream(intArray)
 				.boxed();
 			  //.map(value->Integer.valueOf(value));
