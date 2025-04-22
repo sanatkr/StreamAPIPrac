@@ -1,12 +1,16 @@
 package com.prac.empques;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 //Integer id;
@@ -26,9 +30,12 @@ public class TesterJavaTechies {
 		Employee emp5 = new Employee(5,"female","cse",2019,700.0,22);
 		Employee emp6 = new Employee(6,"male","mech",2014,300.0,30);
 		Employee emp7 = new Employee(1,"female","cset",2020,400.0,27);
+		Employee emp8 = new Employee(1,"female","mech",2025,1000.0,27);
 
 		
-		List<Employee> list = Arrays.asList(emp1,emp2,emp3,emp4,emp5,emp6,emp7);
+
+		
+		List<Employee> list = Arrays.asList(emp1,emp8,emp2,emp3,emp4,emp5,emp6,emp7);
 		return list;
 	}
 	public static void main(String[] args) {
@@ -211,6 +218,146 @@ public class TesterJavaTechies {
 		 		.get();
 		 
 		 System.out.println(employee5);
+		 
+		 
+		 
+		 System.out.println("Question 10 ---------------------------------");
+			// Question 10 (same move to next)
+		 
+		 
+		 
+		 
+		 System.out.println("Question 11 ---------------------------------");
+			// Question 11
+		 
+		 
+		 
+		 System.out.println("Question 12 ---------------------------------");
+			// Question 12
+		 
+		 empList.stream()
+		 		.collect(Collectors.groupingBy(emp -> emp.getDepartment()));
+		 
+		 
+		 
+		 
+		 System.out.println("Question 12 ---------------------------------");
+			// Question 12 (Find the nth Highest Salary)
+		 
+//		 empList.stream()
+//		 		.forEach(emp -> System.out.println(emp.getSalary()));
+		 
+		 
+		 Optional<Employee> first = empList.stream()
+		 		.sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+		 		.skip(1)
+		 		.findFirst();
+		 
+		 System.out.println("Employee with 2nd highest salary is --> "+first.get());
+		 
+		 
+		 Optional<Employee> first2 = empList.stream()
+		 		.sorted(Collections.reverseOrder(Comparator.comparingDouble(emp -> emp.getSalary())))
+		 		.skip(1)
+		 		.findFirst();
+		 
+		 System.out.println("Employee with 2nd highest salary is --> "+first2.get());
+		 
+		 
+		 Optional<Employee> max2 = empList.stream()
+		 		.max(Comparator.comparingDouble(emp -> emp.getSalary()));
+		 
+		 
+//		 empList.stream()
+//		 		.sorted(Comparator.comparingDouble(emp -> emp.getSalary()).reverse())
+//		 		.skip(1)
+//		 		.findFirst();
+		 
+		 
+		 Map<Double, List<Double>> collect9 = empList.stream()
+		 		.map(emp -> emp.getSalary())
+		 		.collect(Collectors.groupingBy(Function.identity()));
+		 
+		 
+		 
+		 
+		System.out.println(collect9);
+
+		
+		Map<Double, Set<Double>> collect10 = empList.stream()
+ 		.map(emp -> emp.getSalary())
+ 		.collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.toSet()));
+		
+//		LinkedHashMap<Double, Set<Double>> collect11 = empList.stream()
+// 		.map(emp -> emp.getSalary())
+// 		.collect(Collectors.groupingBy(Function.identity(),LinkedHashMap::new,Collectors.toSet()));
+		
+		System.out.println(collect10);
+		
+		
+		Optional<Double> first3 = collect10.entrySet()
+				 .stream()
+				 .map(entry -> entry.getKey())
+				 .sorted(Comparator.reverseOrder())
+				 .skip(1)
+				 .findFirst();
+		
+		System.out.println(first3);
+		
+		Optional<Double> first4 = empList.stream()
+				.map(emp -> emp.getSalary())
+				.sorted(Comparator.reverseOrder())
+				.skip(1)
+				.findFirst();
+		
+		System.out.println(first4);
+
+		Optional<Double> first5 = empList.stream()
+		.map(emp -> emp.getSalary())
+		.distinct()
+		.sorted(Comparator.reverseOrder())
+		.skip(1)
+		.findFirst();
+
+		System.out.println(first5);
+		
+		
+		
+		Map<Double, List<Employee>> mapWithSalaryAsKey = empList.stream()
+			   .collect(Collectors.groupingBy(Employee::getSalary,LinkedHashMap::new, Collectors.toList()));
+		
+		System.out.println("Map created is --> "+mapWithSalaryAsKey);
+		
+		
+		Optional<Entry<Double, List<Employee>>> first6 = mapWithSalaryAsKey.entrySet()
+						  .stream()
+						  .sorted(Map.Entry.<Double,List<Employee>>comparingByKey().reversed())
+						  .findFirst();
+		
+		Entry<Double, List<Employee>> entry = mapWithSalaryAsKey.entrySet()
+		  .stream()
+		  .sorted(Collections.reverseOrder(Map.Entry.comparingByKey()))
+		  .skip(1)
+		  .findFirst()
+		  .get();
+		
+		System.out.println(entry);
+		
+		
+//		Entry<Double, List<Employee>> entry2 = mapWithSalaryAsKey.entrySet()
+//		  .stream()
+//		  .min(Map.Entry.comparingByKey())
+//		  .get();
+//		
+//		System.out.println(entry2);
+
+		
+		
+
+
+		 
+		 
+		 
 
 		 
 		 
